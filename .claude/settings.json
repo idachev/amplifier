@@ -1,6 +1,23 @@
 {
   "permissions": {
     "allow": [
+      "Bash(cat:*)",
+      "Bash(curl:*)",
+      "Bash(find:*)",
+      "Bash(gh api:*)",
+      "Bash(gh pr:*)",
+      "Bash(git grep:*)",
+      "Bash(git help:*)",
+      "Bash(git show:*)",
+      "Bash(git subtree:*)",
+      "Bash(git submodule:*)",
+      "Bash(GITHUB_TOKEN= gh api:*)",
+      "Bash(GITHUB_TOKEN= gh pr:*)",
+      "Bash(grep:*)",
+      "Bash(jar tf:*)",
+      "Bash(ls:*)",
+      "Bash(rg:*)",
+      "Bash(tree:*)",
       "mcp__playwright",
       "mcp__deepwiki",
       "WebFetch",
@@ -16,7 +33,13 @@
     ]
   },
   "enableAllProjectMcpServers": false,
-  "enabledMcpjsonServers": ["playwright", "deepwiki"],
+  "enabledMcpjsonServers": [
+    "playwright",
+    "deepwiki",
+    "context7",
+    "repomix",
+    "zen"
+  ],
   "hooks": {
     "SessionStart": [
       {

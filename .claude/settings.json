@@ -1,14 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash",
       "mcp__playwright",
       "mcp__deepwiki",
       "WebFetch",
       "TodoWrite"
     ],
     "deny": [],
-    "defaultMode": "bypassPermissions",
     "additionalDirectories": [
       ".data",
       ".vscode",

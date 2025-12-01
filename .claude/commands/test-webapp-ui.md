@@ -10,7 +10,7 @@ Where:
 ## Context
 
 - Target: $ARGUMENTS
-- Uses browser-use MCP tools for UI testing
+- Uses Playwright MCP tools for UI testing
 
 ## Process
 

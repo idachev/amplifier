@@ -75,6 +75,10 @@ grep -r "TODO.*debug" src/
 Run complete quality check:
 
 ```bash
+# For Node.js/TypeScript projects
+pnpm lint
+
+# For Python projects (or run both if mixed codebase)
 make check
 ```
 
@@ -129,6 +133,13 @@ If changes exist:
 
 If YES:
 
+- **Run linting first**:
+  ```bash
+  pnpm lint     # For Node.js/TypeScript projects
+  # OR
+  make check    # For Python projects
+  ```
+- Ensure linting passes before proceeding
 - Show the diff
 - Ask for commit message or suggest one
 - Request explicit authorization
@@ -292,7 +303,7 @@ Create comprehensive completion summary:
 
 ## Quality Metrics
 
-- `make check`: ✅ Passing / ❌ Issues
+- Linting (`pnpm lint` / `make check`): ✅ Passing / ❌ Issues
 - Code matches documentation: ✅ Yes
 - Examples work: ✅ Yes
 - User testing: ✅ Complete

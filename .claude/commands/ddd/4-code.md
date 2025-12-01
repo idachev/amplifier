@@ -71,8 +71,16 @@ After implementing chunk:
 
 - Run relevant tests
 - Check for syntax errors
+- **Run linting** (choose appropriate command):
+  ```bash
+  pnpm lint          # For Node.js/TypeScript projects
+  # OR
+  make check         # For Python projects
+  ```
 - Basic smoke test
 - Ensure no regressions
+
+**If linting fails**: Fix issues before proceeding to commit
 
 #### Step 4: Show Changes & Get Commit Authorization
 
@@ -94,6 +102,10 @@ Show user:
 ### Tests
 
 [which tests pass]
+
+### Linting
+
+✅ Linting passed (pnpm lint / make check)
 
 ### Diff Summary
 ```

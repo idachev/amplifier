@@ -190,7 +190,15 @@ Please review the changes:
 1. Review the git diff (shown below)
 2. Check above checklist
 3. Provide feedback for any changes needed
-4. When satisfied, commit with your own message
+4. **Run linting before committing**:
+   ```bash
+   # For Node.js/TypeScript projects
+   pnpm lint
+
+   # For Python projects (or if pnpm lint not available)
+   make check
+   ```
+5. When satisfied and linting passes, commit with your own message
 
 ## Next Steps After Commit
 
@@ -353,9 +361,18 @@ See [Authentication Guide](auth.md) for details.
 All documentation updated and staged.
 
 ⚠️ USER ACTION REQUIRED:
-Review the changes above and commit when satisfied:
 
-    git commit -m "docs: [your description]"
+1. **Run linting** (choose appropriate command):
+   ```bash
+   pnpm lint          # For Node.js/TypeScript projects
+   # OR
+   make check         # For Python projects
+   ```
+
+2. **Commit when satisfied** and linting passes:
+   ```bash
+   git commit -m "docs: [your description]"
+   ```
 
 After committing, proceed to code planning:
 

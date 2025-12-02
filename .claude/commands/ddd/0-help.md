@@ -104,6 +104,32 @@ ai_working/ddd/
 
 **Each command reads previous artifacts**, so you can run subsequent commands without arguments if you want to continue from where you left off.
 
+### Git Tracking of DDD Artifacts
+
+**DDD artifacts are committed to git** to document the AI-assisted development process:
+
+- Phase 2 commits include `ai_working/ddd/` files with documentation changes
+- Phase 4 commits include `ai_working/ddd/` files with each code chunk
+- Phase 5 removes `ai_working/ddd/` with a final cleanup commit
+
+This preserves the development history showing how features were built with AI assistance.
+
+### Temporary Files Location
+
+Use `ai_working/tmp/` for any temporary files generated during development:
+
+```
+ai_working/tmp/
+├── [temporary analysis files]
+├── [scratch work]
+└── [intermediate outputs]
+```
+
+**Important**:
+- `ai_working/tmp/` is cleaned up in Phase 5
+- Do NOT use project directories like `./tmp/` for AI temporary files
+- Keep AI-generated temporary work isolated in `ai_working/`
+
 ---
 
 ## Example Usage

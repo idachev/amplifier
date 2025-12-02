@@ -122,6 +122,13 @@ You now have complete understanding of Document-Driven Development:
 - **Progressive Organization**: Right-sized docs (README → Overview → Details)
 - **Test as User**: AI is QA entity, actually uses the feature
 
+### Git Tracking & Temporary Files
+
+- **DDD artifacts are committed** to document AI-assisted development
+- **ai_working/ddd/** files included in commits during Phases 2 and 4
+- **ai_working/tmp/** for temporary scratch work (cleaned up in Phase 5)
+- Development history preserved, cleanup commit at the end
+
 ### Philosophy Alignment
 
 - **Ruthless Simplicity**: Start minimal, avoid future-proofing, clear over clever

@@ -86,6 +86,16 @@ After implementing chunk:
 
 **IMPORTANT**: Each commit requires EXPLICIT user authorization
 
+Before showing changes, stage both code files AND AI working files:
+
+```bash
+# Stage code changes
+git add [changed code files]
+
+# IMPORTANT: Also stage AI working files to document development progress
+git add ai_working/ddd/
+```
+
 Show user:
 
 ```markdown
@@ -94,6 +104,11 @@ Show user:
 ### Files Changed
 
 [list with brief description of changes]
+
+### AI Working Files Updated
+
+- ai_working/ddd/impl_status.md (implementation progress)
+- ai_working/ddd/test_report.md (if tests run)
 
 ### What This Does
 
@@ -110,7 +125,7 @@ Show user:
 ### Diff Summary
 ```
 
-git diff --stat
+git diff --cached --stat
 
 ```
 
@@ -126,9 +141,9 @@ feat: [Chunk description]
 ⚠️ **Request explicit authorization**:
 "Ready to commit? (yes/no/show me diff first)"
 
-If yes: commit with message
+If yes: commit with message (includes ai_working/ddd/ files)
 If no: ask what needs changing
-If show diff: run `git diff` then ask again
+If show diff: run `git diff --cached` then ask again
 ```
 
 #### Step 5: Move to Next Chunk
@@ -395,6 +410,13 @@ Task test-coverage: "Suggest comprehensive test cases for [feature]"
 - If code needs to differ, update docs first
 - Examples in docs MUST work when copy-pasted
 - Error messages should match what docs describe
+
+**Each commit includes AI working files**:
+
+- Stage `ai_working/ddd/` with each commit
+- This documents the AI-assisted development process in git history
+- Shows how the feature was incrementally built
+- Files will be removed in Phase 5 (final cleanup)
 
 **Each commit needs authorization**:
 

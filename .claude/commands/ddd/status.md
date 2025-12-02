@@ -13,6 +13,10 @@ Checking current Document-Driven Development progress...
 
 !`ls -la ai_working/ddd/ 2>/dev/null || echo "❌ No active DDD session (no ai_working/ddd/ directory)"`
 
+## AI Temporary Files
+
+!`ls -la ai_working/tmp/ 2>/dev/null || echo "ℹ️ No ai_working/tmp/ directory (temporary files location)"`
+
 ---
 
 ## Phase Detection

@@ -210,13 +210,20 @@ When you've committed the docs, run: `/ddd:3-code-plan`
 Run these commands to show user the changes:
 
 ```bash
-git add [changed files]
+# Stage documentation changes
+git add [changed doc files]
+
+# IMPORTANT: Also stage AI working files to document the AI-assisted development process
+git add ai_working/ddd/
+
 git status
 git diff --cached --stat
 git diff --cached
 ```
 
-**IMPORTANT**: Stage the changes with `git add` but **DO NOT COMMIT**
+**IMPORTANT**: Stage both the docs AND `ai_working/ddd/` files with `git add` but **DO NOT COMMIT**
+
+**Why include ai_working/ddd/ files?** These files document how the feature was built with AI assistance. Including them in commits preserves the development process in git history. They will be removed in Phase 5.
 
 ---
 
@@ -358,7 +365,7 @@ See [Authentication Guide](auth.md) for details.
 
 ✅ Phase 2 Complete: Non-Code Changes Approved
 
-All documentation updated and staged.
+All documentation and AI working files staged.
 
 ⚠️ USER ACTION REQUIRED:
 
@@ -373,6 +380,9 @@ All documentation updated and staged.
    ```bash
    git commit -m "docs: [your description]"
    ```
+
+   Note: This commit includes ai_working/ddd/ files to document the
+   AI-assisted development process. They will be removed in Phase 5.
 
 After committing, proceed to code planning:
 

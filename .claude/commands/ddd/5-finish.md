@@ -25,50 +25,53 @@ Instructions: $ARGUMENTS
 
 ## Phase 5 Steps
 
-### Step 1: Cleanup Temporary Files
+### Step 1: Cleanup DDD Working Files (Commit the Removal)
 
-Remove all DDD working artifacts:
+The `ai_working/ddd/` files have been tracked throughout development to document the AI-assisted process. Now we remove them with a final commit.
 
 ```bash
-# Show what will be deleted
+# Show what will be deleted (these were tracked in git)
 ls -la ai_working/ddd/
 
-# Ask user: "Delete DDD working files?"
-# If yes:
+# Ask user: "Remove DDD working files and commit the removal?"
+# This creates a clean final state while preserving the development history
+```
+
+If YES:
+
+```bash
+# Remove the DDD working directory
 rm -rf ai_working/ddd/
 
-# Check for other temporary files
-find . -name "*.tmp" -o -name "*.bak" -o -name "*~"
+# Stage the removal for commit
+git add -A ai_working/ddd/
 
-# Ask user: "Delete these temporary files?"
-# If yes, delete them
+# Commit the cleanup
+git commit -m "chore: remove DDD working files after feature completion
+
+The ai_working/ddd/ directory documented the AI-assisted development
+process throughout this feature. The development history is preserved
+in previous commits. Removing now that feature is complete.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
 
-Remove any test artifacts:
+### Step 1b: Cleanup AI Temporary Files
+
+Check for AI-generated temporary files in `ai_working/tmp/`:
 
 ```bash
-# Common locations
-rm -rf .pytest_cache/
-rm -rf __pycache__/
-rm -f .coverage
-rm -rf htmlcov/
+# Check for AI temporary files
+ls -la ai_working/tmp/ 2>/dev/null || echo "No ai_working/tmp/ directory"
 
-# Project-specific cleanup
-[check for test output, debug files, etc.]
+# Ask user: "Clean up ai_working/tmp/ directory?"
+# If yes:
+rm -rf ai_working/tmp/
 ```
 
-Remove debug code:
-
-```bash
-# Search for common debug patterns
-grep -r "console.log" src/
-grep -r "print(" src/  # except legitimate logging
-grep -r "debugger" src/
-grep -r "TODO.*debug" src/
-
-# If found, ask user: "Remove debug code?"
-# Show locations, get confirmation, then remove
-```
+**Note**: Only clean up files in `ai_working/tmp/`. Do not touch project-specific directories like `./tmp/`, `.pytest_cache/`, `__pycache__/`, or other build artifacts.
 
 ### Step 2: Final Verification
 
@@ -407,25 +410,20 @@ DDD workflow completion"
 
 ## Authorization Checkpoints
 
-### 1. Delete DDD Working Files
+### 1. Remove and Commit DDD Working Files
 
-⚠️ **Ask**: "Delete ai_working/ddd/ directory?"
-
-- Show what will be deleted
-- Get explicit yes/no
-
-### 2. Delete Temporary Files
-
-⚠️ **Ask**: "Delete temporary/test artifacts?"
+⚠️ **Ask**: "Remove ai_working/ddd/ and commit the removal?"
 
 - Show what will be deleted
+- Explain: This creates a cleanup commit while preserving development history
 - Get explicit yes/no
+- If yes: Remove files, stage removal, commit with cleanup message
 
-### 3. Remove Debug Code
+### 2. Clean ai_working/tmp/ Directory
 
-⚠️ **Ask**: "Remove debug code?"
+⚠️ **Ask**: "Clean up ai_working/tmp/ directory?"
 
-- Show locations found
+- Show what's in ai_working/tmp/
 - Get explicit yes/no
 
 ### 4. Commit Remaining Changes

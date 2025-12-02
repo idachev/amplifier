@@ -216,6 +216,12 @@ current patterns and architecture"
 - Can we build in increments?
 - Is this the simplest approach that works?
 
+**Temporary files location**:
+
+- Use `ai_working/tmp/` for any temporary analysis or scratch work
+- Do NOT use project directories like `./tmp/`
+- Temporary files in `ai_working/tmp/` are cleaned up in Phase 5
+
 ---
 
 ## When Planning is Approved

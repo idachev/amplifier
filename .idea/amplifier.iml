@@ -2,7 +2,15 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.data" />
+      <excludeFolder url="file://$MODULE_DIR$/.playwright-mcp" />
+      <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/storybook-generator/.open-next" />
+      <excludeFolder url="file://$MODULE_DIR$/storybook-generator/.wrangler" />
+      <excludeFolder url="file://$MODULE_DIR$/storybook-generator/input" />
+      <excludeFolder url="file://$MODULE_DIR$/storybook-generator/output" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

@@ -2,6 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(cat:*)",
+      "Bash(convert:*)",
       "Bash(curl:*)",
       "Bash(echo:*)",
       "Bash(find:*)",
@@ -20,9 +21,12 @@
       "Bash(mkdir:*)",
       "Bash(npx tsc:*)",
       "Bash(npx tsx:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm generate-images:*)",
       "Bash(pnpm install:*)",
       "Bash(pnpm lint:*)",
       "Bash(rg:*)",
+      "Bash(test:*)",
       "Bash(tree:*)",
       "mcp__context7__get-library-docs",
       "mcp__context7__resolve-library-id",

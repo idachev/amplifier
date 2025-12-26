@@ -8,7 +8,10 @@
     },
     "context7": {
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
     },
     "deepwiki": {
       "type": "http",
@@ -16,7 +19,11 @@
     },
     "repomix": {
       "command": "npx",
-      "args": ["-y", "repomix", "--mcp"]
+      "args": [
+        "-y",
+        "repomix",
+        "--mcp"
+      ]
     },
     "zen": {
       "command": "uvx",

@@ -379,26 +379,100 @@ Track implementation and testing tasks:
 
 ---
 
-## Agent Suggestions
+## Agent Orchestration
+
+### Parallel vs Sequential Execution
+
+**CRITICAL**: Send ONE message with MULTIPLE Task tool calls when tasks are independent.
+
+#### When to Parallelize (No Dependencies)
+
+- **Independent chunk implementation** - Chunks with no dependencies on each other
+- **Context loading** - Read multiple source files simultaneously
+- **Test writing** - Write tests for different modules in parallel
+- **Review passes** - Bug hunting + test coverage + philosophy check simultaneously
+
+#### When to Keep Sequential (Dependencies)
+
+- **Dependent chunks** - When one chunk requires another's interfaces
+- **Each commit** - Commits must be sequential with user authorization
+- **Debugging sessions** - Focus on one issue at a time
+- **User feedback integration** - Wait for human input
+
+### Parallel Agent Examples
+
+**Parallel Independent Chunks** (when code_plan.md shows no dependencies):
+```
+# In a SINGLE message, implement multiple independent chunks:
+
+Task modular-builder: "Implement Chunk 1 (data models) according to
+code_plan.md and docs/models.md specification"
+
+Task modular-builder: "Implement Chunk 2 (utility functions) according to
+code_plan.md and docs/utils.md specification"
+
+Task modular-builder: "Implement Chunk 3 (configuration) according to
+code_plan.md and docs/config.md specification"
+```
+
+**Parallel Context Loading** (before implementing a complex chunk):
+```
+# In a SINGLE message, gather all context:
+
+Task Explore: "Read and summarize current src/auth/handler.py implementation"
+Task Explore: "Read and summarize current src/auth/models.py data structures"
+Task Explore: "Read and summarize tests/auth/ test patterns"
+```
+
+**Parallel Test Writing** (after implementation):
+```
+# In a SINGLE message, write tests for different modules:
+
+Task test-coverage: "Write unit tests for src/auth/handler.py per test strategy in code_plan.md"
+Task test-coverage: "Write integration tests for auth flow per code_plan.md"
+```
+
+**Parallel Review** (before committing):
+```
+# In a SINGLE message, get multiple review perspectives:
+
+Task bug-hunter: "Review implementation of [chunk] for potential bugs and edge cases"
+Task zen-architect: "Review implementation for philosophy compliance - ruthless simplicity?"
+Task test-coverage: "Review test coverage - are critical paths tested?"
+```
+
+### Single Agent Tasks
 
 **modular-builder** - For module implementation:
-
 ```
 Task modular-builder: "Implement [chunk] according to code_plan.md
 and documentation specifications"
 ```
 
 **bug-hunter** - When issues found:
-
 ```
 Task bug-hunter: "Debug [specific issue] found during testing"
 ```
 
 **test-coverage** - For test suggestions:
-
 ```
 Task test-coverage: "Suggest comprehensive test cases for [feature]"
 ```
+
+### Chunk Dependency Awareness
+
+Check `code_plan.md` for chunk dependencies:
+```
+Chunk 1 ──┐
+          ├─→ Chunk 3 (depends on 1 and 2)
+Chunk 2 ──┘
+
+# Chunks 1 and 2: Can be parallel
+# Chunk 3: Must wait for 1 and 2
+```
+
+**Parallel**: Chunks 1 and 2 in one message
+**Sequential**: Chunk 3 after 1 and 2 complete
 
 ---
 

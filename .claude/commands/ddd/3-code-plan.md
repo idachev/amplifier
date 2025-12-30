@@ -354,21 +354,82 @@ Track code planning tasks:
 
 ---
 
-## Agent Suggestions
+## Agent Orchestration
+
+### Parallel vs Sequential Execution
+
+**CRITICAL**: Send ONE message with MULTIPLE Task tool calls when tasks are independent.
+
+#### When to Parallelize (No Dependencies)
+
+- **Code file reconnaissance** - Read multiple independent code files simultaneously
+- **Multi-perspective reviews** - Architecture + implementation + testing views in parallel
+- **Gap analysis** - Analyze different modules for gaps independently
+
+#### When to Keep Sequential (Dependencies)
+
+- **Chunk dependency analysis** - Must understand order requirements
+- **Plan writing** - Requires all reconnaissance results
+- **User approval** - Wait for human decision
+
+### Parallel Agent Examples
+
+**Parallel Code Reconnaissance** (spawn in ONE message):
+```
+# In a SINGLE message, analyze multiple code areas:
+
+Task Explore: "Analyze src/auth/ module - current state, patterns, interfaces"
+Task Explore: "Analyze src/api/ module - current endpoints, request handling"
+Task Explore: "Analyze tests/ structure - test patterns, coverage approach"
+```
+
+**Parallel Multi-Agent Review** (spawn in ONE message):
+```
+# In a SINGLE message, get three perspectives:
+
+Task zen-architect: "Review code plan for architecture compliance
+with IMPLEMENTATION_PHILOSOPHY and MODULAR_DESIGN_PHILOSOPHY"
+
+Task modular-builder: "Review code plan, assess if specs are complete
+enough for implementation - flag any ambiguities"
+
+Task test-coverage: "Review code plan, suggest comprehensive test strategy
+for the proposed changes"
+```
+
+**Parallel Gap Analysis** (spawn in ONE message):
+```
+# In a SINGLE message, analyze gaps in different areas:
+
+Task zen-architect: "Compare docs/api.md spec with current src/api/ code - what's the gap?"
+Task zen-architect: "Compare docs/config.md spec with current config handling - what's the gap?"
+```
+
+### Single Agent Tasks
 
 **zen-architect** - For architecture review:
-
 ```
 Task zen-architect: "Review code plan for architecture compliance
 with IMPLEMENTATION_PHILOSOPHY and MODULAR_DESIGN_PHILOSOPHY"
 ```
 
 **modular-builder** - To validate buildability:
-
 ```
 Task modular-builder: "Review code plan, assess if specs are complete
 enough for implementation"
 ```
+
+**test-coverage** - For test planning:
+```
+Task test-coverage: "Suggest comprehensive tests for planned implementation"
+```
+
+### Chunk Planning Note
+
+When defining implementation chunks, consider:
+- **Independent chunks** → Can be implemented in parallel (Phase 4)
+- **Dependent chunks** → Must be sequential
+- Mark dependencies clearly in code_plan.md
 
 ---
 

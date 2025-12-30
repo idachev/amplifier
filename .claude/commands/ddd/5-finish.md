@@ -396,15 +396,74 @@ Track finalization tasks:
 
 ---
 
-## Agent Suggestions
+## Agent Orchestration
+
+### Parallel vs Sequential Execution
+
+**CRITICAL**: Send ONE message with MULTIPLE Task tool calls when tasks are independent.
+
+#### When to Parallelize (No Dependencies)
+
+- **Verification checks** - Multiple independent quality assessments
+- **Cleanup scans** - Search for different types of artifacts simultaneously
+- **Final reviews** - Philosophy check + code review + test verification
+
+#### When to Keep Sequential (ALL git operations)
+
+- **Every git operation** - Commits, pushes, PRs require user authorization
+- **User approval checkpoints** - Wait for human decision
+- **Cleanup execution** - After scans, execute cleanup sequentially
+
+### Parallel Agent Examples
+
+**Parallel Final Verification** (spawn in ONE message):
+```
+# In a SINGLE message, run multiple verification checks:
+
+Task zen-architect: "Final review of implementation for philosophy compliance
+- ruthless simplicity maintained?"
+
+Task bug-hunter: "Final scan for any obvious bugs, edge cases, or issues"
+
+Task test-coverage: "Verify all critical paths are tested, no gaps in coverage"
+```
+
+**Parallel Cleanup Scan** (spawn in ONE message):
+```
+# In a SINGLE message, scan for different cleanup needs:
+
+Task post-task-cleanup: "Scan for temporary files, debug code, or test artifacts
+that should be removed"
+
+Task Explore: "Find any TODO comments, placeholder code, or incomplete
+implementations that need addressing"
+```
+
+**Parallel Documentation Verification** (spawn in ONE message):
+```
+# In a SINGLE message, verify docs are complete:
+
+Task Explore: "Check all code changes have corresponding documentation updates"
+Task zen-architect: "Review docs for consistency with implementation"
+```
+
+### Single Agent Tasks
 
 **post-task-cleanup** - For thorough cleanup:
-
 ```
 Task post-task-cleanup: "Review entire workspace for any remaining
 temporary files, test artifacts, or unnecessary complexity after
 DDD workflow completion"
 ```
+
+### Git Operations Note
+
+**ALL git operations remain strictly sequential** with explicit user authorization:
+1. Cleanup commit (remove DDD files)
+2. Push to remote
+3. Create PR
+
+**Never batch git operations** - each requires user approval.
 
 ---
 

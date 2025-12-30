@@ -226,6 +226,14 @@ ai_working/tmp/
 - test-coverage for tests
 - post-task-cleanup for cleanup
 
+**Parallel Execution** (CRITICAL for performance):
+
+- Send ONE message with MULTIPLE Task tool calls for independent work
+- Parallelize: Reads, reconnaissance, independent analysis, reviews
+- Keep Sequential: Writes with dependencies, git ops, user approvals
+
+See each phase's "Agent Orchestration" section for specific patterns.
+
 ---
 
 ## Authorization Checkpoints
@@ -326,6 +334,54 @@ Check the loaded documentation:
 - Never commit without explicit authorization
 - Iterate based on user feedback
 - Exit phases only when user confirms ready
+
+---
+
+## Parallel Agent Orchestration Guide
+
+**Core Principle**: Parallelize reads and independent analysis; keep writes and user checkpoints sequential.
+
+### Quick Reference Table
+
+| Phase | Parallelize | Keep Sequential |
+|-------|-------------|-----------------|
+| 1-plan | Multiple reconnaissance searches, design reviews | Problem → Design → Plan flow |
+| 2-docs | Initial reads, concept extraction, conflict detection | File updates (if dependent), user approval |
+| 3-code-plan | Code file reads, multi-agent reviews | Chunk ordering, gap analysis |
+| 4-code | Independent chunks, context loading, test writing | Dependent chunks, commits |
+| 5-finish | Verification checks, cleanup scans | All git operations |
+
+### How to Parallelize
+
+**Send ONE message with MULTIPLE Task tool calls**:
+
+```
+# CORRECT - Single message, multiple agents:
+Task zen-architect: "Review architecture..."
+Task modular-builder: "Assess implementation readiness..."
+Task test-coverage: "Suggest test strategy..."
+
+# WRONG - Multiple messages:
+[First message]
+Task zen-architect: "Review architecture..."
+[Second message]
+Task modular-builder: "Assess implementation readiness..."
+```
+
+### Decision Framework
+
+```
+Is the task independent? ──┬── YES → Include in parallel batch
+                           │
+                           └── NO (has dependencies) → Wait, then execute
+```
+
+### Per-Phase Details
+
+Each DDD command file (1-plan through 5-finish) contains an **"Agent Orchestration"** section with:
+- Specific parallelization opportunities for that phase
+- Example parallel agent invocations
+- Sequential requirements to respect
 
 ---
 

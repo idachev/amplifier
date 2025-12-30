@@ -266,21 +266,105 @@ Track doc update tasks:
 
 ---
 
-## Agent Suggestions
+## Agent Orchestration
+
+### Parallel vs Sequential Execution
+
+**CRITICAL**: Send ONE message with MULTIPLE Task tool calls when tasks are independent.
+
+#### When to Parallelize (No Dependencies)
+
+- **Initial file reads** - Read multiple docs simultaneously before editing
+- **Concept extraction** - Extract from multiple unrelated sources
+- **Conflict detection** - Check multiple file pairs for contradictions
+- **Final verification passes** - Multiple independent quality checks
+
+#### When to Keep Sequential (Must wait)
+
+- **File crawling updates** - Process one file at a time to maintain context
+- **User feedback integration** - Wait for human decisions
+- **Conflict resolution** - Resolve one at a time with user input
+- **Final staging/commit** - Sequential git operations
+
+### Parallel Agent Examples
+
+**Parallel Initial Analysis** (spawn in ONE message):
+```
+# In a SINGLE message, call all three:
+
+Task concept-extractor: "Extract key concepts from [existing-doc-1] relevant to [feature]"
+Task concept-extractor: "Extract key concepts from [existing-doc-2] relevant to [feature]"
+Task concept-extractor: "Extract key concepts from [existing-doc-3] relevant to [feature]"
+```
+
+**Parallel Conflict Detection** (spawn in ONE message):
+```
+# In a SINGLE message, call both:
+
+Task ambiguity-guardian: "Check for conflicts between [docs/api.md] and [plan.md]"
+Task ambiguity-guardian: "Check for conflicts between [README.md] and [docs/overview.md]"
+```
+
+**Parallel Verification** (spawn in ONE message):
+```
+# In a SINGLE message, verify multiple aspects:
+
+Task zen-architect: "Review updated docs for ruthless simplicity - any unnecessary complexity?"
+Task Explore: "Find any remaining references to old patterns that should be updated"
+```
+
+### Single Agent Tasks
 
 **concept-extractor** - For extracting knowledge from complex docs:
-
 ```
 Task concept-extractor: "Extract key concepts from [source] to include
 in [target doc]"
 ```
 
 **ambiguity-guardian** - If docs have tensions/contradictions:
-
 ```
 Task ambiguity-guardian: "Analyze apparent contradiction between
 [doc1] and [doc2], determine if both views are valid"
 ```
+
+### Parallel File Updates (When Appropriate)
+
+**When changes are pre-determined and files are independent**, use parallel subagents:
+
+```
+# In a SINGLE message, spawn modular-builder for each independent file:
+
+Task modular-builder: "Update docs/api.md with the new endpoint documentation
+per plan.md section 'API Changes'. Apply retcon writing style."
+
+Task modular-builder: "Update docs/configuration.md with new settings
+per plan.md section 'Config Changes'. Apply retcon writing style."
+
+Task modular-builder: "Update README.md quickstart section
+per plan.md section 'User-Facing Changes'. Apply retcon writing style."
+```
+
+**When to use parallel file updates:**
+- Changes are clearly specified in plan.md
+- Files don't reference each other
+- No cross-file terminology decisions needed
+- Each file is self-contained
+
+**When to keep sequential (one at a time):**
+- Files reference each other (update order matters)
+- Terminology needs to be consistent across files
+- Changes in one file inform changes in another
+- Complex interdependencies exist
+
+### File Crawling Note (Sequential Alternative)
+
+For complex, interdependent documentation updates, **sequential file crawling** remains appropriate:
+- Full context for each file
+- No cross-file conflicts during editing
+- Clear progress tracking
+- Token efficiency
+
+**Choose the right approach based on file dependencies.**
 
 ---
 

@@ -135,6 +135,14 @@ You now have complete understanding of Document-Driven Development:
 - **Modular Design**: Bricks (modules) and studs (interfaces), regeneratable from specs
 - **Human Architects, AI Builds**: Human designs and reviews, AI implements
 
+### Parallel Agent Orchestration
+
+- **Core Principle**: Parallelize reads and independent analysis; keep writes and checkpoints sequential
+- **How**: Send ONE message with MULTIPLE Task tool calls for independent work
+- **Parallelize**: Reconnaissance, reviews, independent file updates, verification checks
+- **Keep Sequential**: Dependent writes, git operations, user approvals
+- **See**: Each phase has an "Agent Orchestration" section with specific patterns
+
 ### Authorization Model
 
 - **User controls all git operations**: No auto-commits, explicit approval required

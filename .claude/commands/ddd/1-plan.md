@@ -178,22 +178,66 @@ Track planning tasks:
 
 ---
 
-## Agent Suggestions
+## Agent Orchestration
 
-Consider spawning agents for help:
+### Parallel vs Sequential Execution
+
+**CRITICAL**: Send ONE message with MULTIPLE Task tool calls when tasks are independent.
+
+#### When to Parallelize (No Dependencies)
+
+- **Multiple reconnaissance searches** - Different aspects of the codebase
+- **Design reviews** - Architecture review + philosophy check can run simultaneously
+- **Gathering diverse perspectives** - Multiple agents analyzing the same problem
+
+#### When to Keep Sequential (Dependencies)
+
+- **Problem framing → Reconnaissance → Design** - Each informs the next
+- **User feedback integration** - Must wait for human input
+- **Final plan creation** - Requires all prior analysis
+
+### Parallel Agent Examples
+
+**Parallel Reconnaissance** (spawn in ONE message):
+```
+# In a SINGLE message, call all three Task tools:
+
+Task Explore: "Find all authentication-related code, understand current patterns"
+Task Explore: "Find all API endpoint patterns, understand request/response conventions"
+Task Explore: "Find all configuration patterns, understand how settings are managed"
+```
+
+**Parallel Design Review** (spawn in ONE message):
+```
+# In a SINGLE message, call both:
+
+Task zen-architect: "Review proposed architecture for [feature],
+check against IMPLEMENTATION_PHILOSOPHY - is this the simplest approach?"
+
+Task zen-architect: "Review module boundaries for [feature],
+check against MODULAR_DESIGN_PHILOSOPHY - are studs/interfaces clear?"
+```
+
+### Single Agent Tasks
 
 **zen-architect** - For complex architectural decisions:
-
 ```
 Task zen-architect: "Design approach for [feature], considering
 IMPLEMENTATION_PHILOSOPHY and MODULAR_DESIGN_PHILOSOPHY"
 ```
 
 **Explore agent** - For codebase reconnaissance:
-
 ```
 Task Explore: "Find all code related to [topic], understand
 current patterns and architecture"
+```
+
+### Decision Framework
+
+```
+Is task independent? ─────┬─── YES → Parallelize with other independent tasks
+                          │
+                          └─── NO (depends on prior task) → Wait for prior to complete
 ```
 
 ---

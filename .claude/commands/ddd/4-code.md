@@ -193,7 +193,6 @@ Write `ai_working/ddd/test_report.md`:
 
 Feature: [name]
 Tested by: AI (as QA entity)
-Date: [timestamp]
 
 ## Test Scenarios
 

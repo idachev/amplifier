@@ -191,6 +191,15 @@ ai_working/tmp/
 
 ## Key Design Decisions
 
+### No Dates or Timeline Estimates in Documents
+
+**Critical document formatting rules**:
+
+- **No dates**: Never include dates in generated documents. Git commit history provides all temporal information needed.
+- **No timeline estimates**: Never include estimates like "2-3 weeks", "Phase 1 takes X days", or "this will take Y hours". AI agents complete work at variable speeds, making such estimates meaningless and often wrong.
+
+These rules apply to all DDD artifacts: plan.md, docs_status.md, code_plan.md, test_report.md, and any documentation updates.
+
 ### No Auto-Commits
 
 **Every git operation requires explicit user authorization**:

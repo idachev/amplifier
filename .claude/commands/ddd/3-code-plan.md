@@ -78,7 +78,6 @@ Write `ai_working/ddd/code_plan.md`:
 ```markdown
 # Code Implementation Plan
 
-Generated: [timestamp]
 Based on: Phase 1 plan + Phase 2 documentation
 
 ## Summary

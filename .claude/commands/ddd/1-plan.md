@@ -66,6 +66,10 @@ Develop the approach:
 
 ### 4. Create Detailed Plan
 
+**IMPORTANT**: Do not include dates or timeline estimates in the plan:
+- No dates (git history tracks temporal info)
+- No timeline estimates like "2 weeks" or "Phase 1 takes X days" (AI agents work at variable speeds, making estimates wrong)
+
 Write `ai_working/ddd/plan.md` with this structure:
 
 ```markdown

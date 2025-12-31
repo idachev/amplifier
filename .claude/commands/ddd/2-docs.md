@@ -433,6 +433,10 @@ See [Authentication Guide](auth.md) for details.
 - Config examples: Show the actual config (it works)
 - No "TODO", "Coming soon", "Will be added"
 
+**No dates or timelines**:
+- Never include dates in documents (git history tracks this)
+- Never include timeline estimates (AI agents complete work at variable speeds, making estimates meaningless)
+
 **Stage but don't commit**:
 - Use `git add` to stage
 - Show diff to user

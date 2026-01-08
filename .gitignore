@@ -69,3 +69,6 @@ ai_working/tmp
 *.log.jsonl
 
 /.playwright-mcp
+
+/tmp
+

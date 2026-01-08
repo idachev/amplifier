@@ -1,4 +1,0 @@
-[submodule "storybook-generator"]
-	path = storybook-generator
-	url = ./storybook-generator
-	ignore = dirty
